@@ -26,6 +26,7 @@ public class MasterAPITest {
 			.header("Authorization",tokenProvider(FD))
 			.and()
 			.contentType("")  //whenever the body in post request is empty, the default content type is  application-url/formencoded
+			.log().uri()
 		.when()
 			.post("master")
 		.then()

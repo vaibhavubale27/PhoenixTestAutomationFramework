@@ -19,6 +19,7 @@ public class CountAPITest {
 			.baseUri(getProperty("BASE_URI"))
 			.and()
 			.header("Authorization",tokenProvider(FD))
+			.log().uri()
 	    .when()
 	    	.get("/dashboard/count")
 	    .then()

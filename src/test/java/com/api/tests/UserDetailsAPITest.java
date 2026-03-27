@@ -32,6 +32,7 @@ public class UserDetailsAPITest {
 			.contentType(JSON)
 			.and()
 			.accept(JSON)
+			.log().uri()
 		.when()
 			.get("userdetails")
 		.then()
