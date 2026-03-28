@@ -32,7 +32,7 @@ public class CountAPITest {
 	    	.body("data.count", everyItem(greaterThanOrEqualTo(0)))
 			.body("data.label",everyItem(not(blankOrNullString())))
 			.body("data.key", containsInAnyOrder("pending_fst_assignment","created_today","pending_for_delivery") )
-			.body(matchesJsonSchemaInClasspath("response-schema\\CountAPIResponseSchema.json"));
+			.body(matchesJsonSchemaInClasspath("response-schema/CountAPIResponseSchema.json"));
 			}
 	
 	@Test
