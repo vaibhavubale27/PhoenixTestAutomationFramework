@@ -2,9 +2,10 @@ package com.api.tests;
 
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import static org.hamcrest.Matchers.*;
 import static com.api.constants.Role.*;
-import static com.api.utils.AuthTokenProvider.*;
 import static com.api.utils.ConfigManager.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import static io.restassured.RestAssured.*;
@@ -16,17 +17,11 @@ public class CountAPITest {
 	@Test
 	public void verifyCountAPIResponse() throws IOException {
 		given()
-			.baseUri(getProperty("BASE_URI"))
-			.and()
-			.header("Authorization",tokenProvider(FD))
-			.log().uri()
+			.spec(SpecUtil.requestSpecWithAuthinticationToken(FD))
 	    .when()
 	    	.get("/dashboard/count")
 	    .then()
-	    	.log().all()
-	    	.statusCode(200)
-	    	.body("message",equalTo("Success"))
-	    	.time(lessThan(1000L))
+	    	.spec(SpecUtil.responseSpec_OK())
 	    	.body("data",notNullValue())
 	    	.body("data.size()", equalTo(3))
 	    	.body("data.count", everyItem(greaterThanOrEqualTo(0)))
@@ -38,13 +33,11 @@ public class CountAPITest {
 	@Test
 	public void countAPIRequest_MissingAuthToken() throws IOException {
 		  given()
-		  	.baseUri(getProperty("BASE_URI"))
-		  	.and()
-		  	//.header("Authorization",tokenProvider(null))
+		  	.spec(SpecUtil.requestSpec()) //Negative test case: Passing Authorization token null
 	  	.when()
 	  		.get("/dashboard/count")
 	    .then()
-	    	.statusCode(401);
+	    	.spec(SpecUtil.responseSpec_Text(401));
 	}
 
 }
