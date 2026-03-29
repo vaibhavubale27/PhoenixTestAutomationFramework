@@ -12,7 +12,7 @@ on:
       env:
         description: "Enviroment"
         type: choice
-        options: [dev,qat,uat]
+        options: [dev,qa,uat]
         default: qa
         required: true
         
