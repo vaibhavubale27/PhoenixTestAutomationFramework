@@ -3,6 +3,8 @@ package com.api.tests;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 import static com.api.constants.Role.*;
@@ -21,18 +23,12 @@ public class MasterAPITest {
 	public void masterAPITest() throws IOException {
 		
 		given()
-			.baseUri(getProperty("BASE_URI"))
-			.and()
-			.header("Authorization",tokenProvider(FD))
-			.and()
+		    .spec(SpecUtil.requestSpecWithAuthinticationToken(FD))
 			.contentType("")  //whenever the body in post request is empty, the default content type is  application-url/formencoded
-			.log().uri()
 		.when()
 			.post("master")
 		.then()
-			.statusCode(200)
-			.log().all()
-			.time(lessThan(1000L))
+			.spec(SpecUtil.responseSpec_OK())
 			.body("message", equalTo("Success"))
 			.body("data", notNullValue())
 			.body("data",hasKey("mst_model"))
@@ -50,13 +46,11 @@ public class MasterAPITest {
 	@Test
 	public void masterAPINegativeTest() throws IOException {
 		given()
-			.baseUri(getProperty("BASE_URI"))
-			.header("Authorization","")
-			.contentType("")
+			.spec(SpecUtil.requestSpec())
 		.when()
 			.post("master")
 		.then()
-			.statusCode(401);
+			.spec(SpecUtil.responseSpec_Text(401));
 		
 	}
 
