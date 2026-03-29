@@ -12,7 +12,7 @@ on:
       env:
         description: "Enviroment"
         type: choice
-        options: [dev, qat,uat]
+        options: [dev,qat,uat]
         default: qa
         required: true
         
@@ -33,7 +33,7 @@ jobs:
         cache: maven
         
     - name: Executing Test Automation Frameworks
-      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=qa
+      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=${{ github.event.inputs.env }}
 
     - name: Upload A Build Artifact
       if: always()
