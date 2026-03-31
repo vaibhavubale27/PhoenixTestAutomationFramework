@@ -53,6 +53,23 @@ public class SpecUtil {
 		return requestSpecification;	
 	}
 	
+	public static RequestSpecification requestSpecWithAuthinticationToken(Role role, Object payload) throws IOException {
+		 RequestSpecification requestSpecification = new RequestSpecBuilder()
+		.setBaseUri(getProperty("BASE_URI"))
+		.and()
+		.addHeader("Authorization" ,tokenProvider(role))
+		.setBody(payload)
+		.setContentType(JSON)
+		.and()
+		.setAccept(JSON)
+		.and()
+		.log(LogDetail.URI)
+		.log(LogDetail.HEADERS)
+		.log(LogDetail.METHOD)
+		.build();
+		return requestSpecification;	
+	}
+	
 	public static RequestSpecification requestSpecWithAuthinticationToken(Role role) throws IOException {
 		 RequestSpecification requestSpecification = new RequestSpecBuilder()
 		.setBaseUri(getProperty("BASE_URI"))
