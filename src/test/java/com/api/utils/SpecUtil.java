@@ -13,7 +13,7 @@ import java.io.IOException;
 import static org.hamcrest.Matchers.*;
 
 import com.api.constants.Role;
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 import static com.api.utils.ConfigManager.*;
 
@@ -66,6 +66,7 @@ public class SpecUtil {
 		.log(LogDetail.URI)
 		.log(LogDetail.HEADERS)
 		.log(LogDetail.METHOD)
+		.log(LogDetail.BODY)
 		.build();
 		return requestSpecification;	
 	}
@@ -92,6 +93,7 @@ public class SpecUtil {
 		.expectStatusCode(200)
 		.expectResponseTime(lessThan(1000L))
 		.log(LogDetail.ALL)
+		.log(LogDetail.BODY)
 		.build();
 		
 		return responseSpecification;

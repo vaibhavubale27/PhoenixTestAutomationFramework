@@ -4,7 +4,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import java.io.IOException;
 import org.testng.annotations.Test;
-import com.api.pojo.UserCredentials;
+
+import com.api.request.model.UserCredentials;
 import com.api.utils.SpecUtil;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;

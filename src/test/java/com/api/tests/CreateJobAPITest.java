@@ -4,17 +4,21 @@ import static com.api.constants.Role.FD;
 import static io.restassured.RestAssured.given;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+
 import org.testng.annotations.Test;
 
-import com.api.pojo.CreateJobPayload;
-import com.api.pojo.Customer;
-import com.api.pojo.Customer_address;
-import com.api.pojo.Customer_product;
-import com.api.pojo.Problems;
+import com.api.request.model.CreateJobPayload;
+import com.api.request.model.Customer;
+import com.api.request.model.Customer_address;
+import com.api.request.model.Customer_product;
+import com.api.request.model.Problems;
+import static com.api.utils.DateTimeUtil.*;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -23,10 +27,10 @@ public class CreateJobAPITest {
 
 	@Test
 	public void createJobAPITest() throws IOException {
-		
+			
 		Customer customer=new Customer("Jatin", "Shharma", "9897969594", "", "Jatin.Sharma@techwithjatin.com", "Jatin.Sharma@techwithjatin.com");
 		Customer_address customer_address=new Customer_address("902","Yashwin Urbo","Pune-Banglore highway","Wakad","Pune","411033","India","Maharashtra");
-		Customer_product customer_product=new Customer_product("2025-12-17T18:30:00.000Z","99384702970370","99384702970370", "99384702970370","2025-12-17T18:30:00.000Z",1,1);
+		Customer_product customer_product=new Customer_product(getTimeWithDaysAgo(10),"99384702977777","99384702977777", "99384702977777",getTimeWithDaysAgo(10),1,1);
 		Problems problems=new Problems(1, "Phone is dead");
 		List <Problems> problemsList=new ArrayList<Problems>();
 		problemsList.add(problems);
