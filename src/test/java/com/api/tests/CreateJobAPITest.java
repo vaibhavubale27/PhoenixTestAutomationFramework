@@ -37,7 +37,7 @@ public class CreateJobAPITest {
 	public void setup() {
 		Customer customer=new Customer("Jatin", "Shharma", "9897969594", "", "Jatin.Sharma@techwithjatin.com", "Jatin.Sharma@techwithjatin.com");
 		Customer_address customer_address=new Customer_address("902","Yashwin Urbo","Pune-Banglore highway","Wakad","Pune","411033","India","Maharashtra");
-		Customer_product customer_product=new Customer_product(getTimeWithDaysAgo(10),"99374702977771","99374702977771", "99374702977771",getTimeWithDaysAgo(10),Product.NEXUS_2.getCode(),Model.NEXUS_2_BLUE.getCode());
+		Customer_product customer_product=new Customer_product(getTimeWithDaysAgo(10),"99374702977770","99374702977770", "99374702977770",getTimeWithDaysAgo(10),Product.NEXUS_2.getCode(),Model.NEXUS_2_BLUE.getCode());
 		Problems problems=new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Phone is running too slow");
 		List <Problems> problemsList=new ArrayList<Problems>();
 		problemsList.add(problems);
@@ -55,7 +55,7 @@ public class CreateJobAPITest {
 			.post("/job/create")
 		.then()
 			.spec(responseSpec_OK())
-			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema\\CreateJobResponseSchema.json"))
+			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/CreateJobResponseSchema.json"))
 			.body("message", equalTo("Job created successfully. "))
 			.body("data.job_number", startsWith("JOB_"))
 			.body("data.mst_warrenty_status_id", equalTo(1));
