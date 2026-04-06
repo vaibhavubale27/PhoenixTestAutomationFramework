@@ -13,6 +13,13 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;
 
+import com.api.constants.Model;
+import com.api.constants.OEM;
+import com.api.constants.Platform;
+import com.api.constants.Problem;
+import com.api.constants.Product;
+import com.api.constants.Service_Location;
+import com.api.constants.Warrenty_Status;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.Customer_address;
@@ -30,11 +37,11 @@ public class CreateJobAPITest {
 			
 		Customer customer=new Customer("Jatin", "Shharma", "9897969594", "", "Jatin.Sharma@techwithjatin.com", "Jatin.Sharma@techwithjatin.com");
 		Customer_address customer_address=new Customer_address("902","Yashwin Urbo","Pune-Banglore highway","Wakad","Pune","411033","India","Maharashtra");
-		Customer_product customer_product=new Customer_product(getTimeWithDaysAgo(10),"99384702977777","99384702977777", "99384702977777",getTimeWithDaysAgo(10),1,1);
-		Problems problems=new Problems(1, "Phone is dead");
+		Customer_product customer_product=new Customer_product(getTimeWithDaysAgo(10),"99384702977771","99384702977771", "99384702977771",getTimeWithDaysAgo(10),Product.NEXUS_2.getCode(),Model.NEXUS_2_BLUE.getCode());
+		Problems problems=new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Phone is running too slow");
 		List <Problems> problemsList=new ArrayList<Problems>();
 		problemsList.add(problems);
-		CreateJobPayload createJobPayload=new CreateJobPayload(0, 2, 1, 1, customer , customer_address, customer_product, problemsList);
+		CreateJobPayload createJobPayload=new CreateJobPayload(Service_Location.SERVICE_LOCATION_A.getCode(), Platform.FRONT_DESK.getCode(), Warrenty_Status.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer , customer_address, customer_product, problemsList);
 		given()
 			.spec(SpecUtil.requestSpecWithAuthinticationToken(FD, createJobPayload))
 		.when()
