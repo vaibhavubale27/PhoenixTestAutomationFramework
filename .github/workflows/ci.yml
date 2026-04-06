@@ -2,9 +2,9 @@ name: Phoenix Test Automation Workflow
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "feature/r7-create-job-api" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "feature/r7-create-job-api" ]
   schedule: #set the cron for midnight IST
     - cron: "30 18 * * *"
     - cron: "30 17 * * *"
