@@ -1,27 +1,26 @@
 package com.api.tests;
 
-import org.testng.annotations.Test;
-
-import com.api.utils.SpecUtil;
-
+import static com.api.constants.Role.FD;
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.*;
-import static com.api.constants.Role.*;
-import static com.api.utils.ConfigManager.*;
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
-import static io.restassured.RestAssured.*;
 
 import java.io.IOException;
 
+import org.testng.annotations.Test;
+
+import static com.api.utils.SpecUtil.*;
+
 public class CountAPITest {
 	
-	@Test
+	@Test(description = "Vrifying the Count API is giving correct response or not",groups = {"smoke","regression","api"})
 	public void verifyCountAPIResponse() throws IOException {
 		given()
-			.spec(SpecUtil.requestSpecWithAuthinticationToken(FD))
+			.spec(requestSpecWithAuthinticationToken(FD))
 	    .when()
 	    	.get("/dashboard/count")
 	    .then()
-	    	.spec(SpecUtil.responseSpec_OK())
+	    	.spec(responseSpec_OK())
 	    	.body("data",notNullValue())
 	    	.body("data.size()", equalTo(3))
 	    	.body("data.count", everyItem(greaterThanOrEqualTo(0)))
@@ -30,14 +29,14 @@ public class CountAPITest {
 			.body(matchesJsonSchemaInClasspath("response-schema/CountAPIResponseSchema.json"));
 			}
 	
-	@Test
+	@Test(description = "Vrifying the Count API is giving correct response or not for invalid token",groups = {"negative","smoke","regression","api"})
 	public void countAPIRequest_MissingAuthToken() throws IOException {
 		  given()
-		  	.spec(SpecUtil.requestSpec()) //Negative test case: Passing Authorization token null
+		  	.spec(requestSpec()) //Negative test case: Passing Authorization token null
 	  	.when()
 	  		.get("/dashboard/count")
 	    .then()
-	    	.spec(SpecUtil.responseSpec_Text(401));
+	    	.spec(responseSpec_Text(401));
 	}
 
 }

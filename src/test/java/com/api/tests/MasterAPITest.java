@@ -3,15 +3,11 @@ package com.api.tests;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
-import io.restassured.module.jsv.JsonSchemaValidator;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 import static com.api.constants.Role.*;
-import static com.api.utils.AuthTokenProvider.*;
-import static com.api.utils.ConfigManager.*;
-
-import static io.restassured.http.ContentType.*;
 
 import static io.restassured.RestAssured.*;
 
@@ -19,16 +15,16 @@ import java.io.IOException;
 
 public class MasterAPITest {
 	
-	@Test
+	@Test(description = "Vrifying the master API is giving correct response or not",groups = {"smoke","regression","api"})
 	public void masterAPITest() throws IOException {
 		
 		given()
-		    .spec(SpecUtil.requestSpecWithAuthinticationToken(FD))
+		    .spec(requestSpecWithAuthinticationToken(FD))
 			.contentType("")  //whenever the body in post request is empty, the default content type is  application-url/formencoded
 		.when()
 			.post("master")
 		.then()
-			.spec(SpecUtil.responseSpec_OK())
+			.spec(responseSpec_OK())
 			.body("message", equalTo("Success"))
 			.body("data", notNullValue())
 			.body("data",hasKey("mst_model"))
@@ -39,18 +35,18 @@ public class MasterAPITest {
 		    .body("data.mst_model.size()", equalTo(3))
 		    .body("data.mst_oem.id",everyItem(notNullValue()))
 		    .body("data.mst_oem.name",everyItem(notNullValue()))
-		    .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
+		    .body(matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
 		
 	}
 	
-	@Test
+	@Test(description = "Vrifying the master API is giving correct response or not for invalid token",groups = {"negative","smoke","regression","api"})
 	public void masterAPINegativeTest() throws IOException {
 		given()
-			.spec(SpecUtil.requestSpec())
+			.spec(requestSpec())
 		.when()
 			.post("master")
 		.then()
-			.spec(SpecUtil.responseSpec_Text(401));
+			.spec(responseSpec_Text(401));
 		
 	}
 
