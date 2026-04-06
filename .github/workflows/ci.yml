@@ -2,9 +2,9 @@ name: Phoenix Test Automation Workflow
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "feature/r7-create-job-api" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "feature/r7-create-job-api" ]
   schedule: #set the cron for midnight IST
     - cron: "30 18 * * *"
     - cron: "30 17 * * *"
@@ -48,7 +48,7 @@ jobs:
             echo "env=${{ github.event.inputs.env || 'qa'}}" >> $GITHUB_OUTPUT
         
     - name: Execute Test Automation Framework
-      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}"
+      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}" 
 
     - name: Upload A Build Artifact
       if: always()
