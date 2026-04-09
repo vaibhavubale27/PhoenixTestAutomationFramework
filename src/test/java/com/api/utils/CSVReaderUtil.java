@@ -2,6 +2,7 @@ package com.api.utils;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
 import com.dataproviders.api.bean.UserBean;
@@ -24,7 +25,7 @@ public class CSVReaderUtil {
 	}
 	
 
-	public static void loadCSV(String pathOFCSVFile) {
+	public static Iterator<UserBean> loadCSV(String pathOFCSVFile) {
 		
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOFCSVFile);
 		
@@ -40,7 +41,11 @@ public class CSVReaderUtil {
 		
 		List<UserBean> userList = csvTobean.parse();
 		
-		System.out.print(userList);
+		//System.out.print(userList);
+		
+		//Here the Data provider concept came in a picture
+		
+		return userList.iterator();
 		
 		
 		
