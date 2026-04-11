@@ -4,9 +4,9 @@ import com.opencsv.bean.CsvBindByName;
 
 public class UserBean {
 	
-	@CsvBindByName
+	@CsvBindByName(column = "username")
 	private String username;
-	@CsvBindByName
+	@CsvBindByName(column = "password")
 	private String password;
 	public String getUsername() {
 		return username;
@@ -20,17 +20,13 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public UserBean(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+
 	@Override
 	public String toString() {
 		return "UserPOJO [username=" + username + ", password=" + password + "]";
 	}
 	
-	public UserBean() {
+	public UserBean() {   //No argument constructor
 		
 	}
 

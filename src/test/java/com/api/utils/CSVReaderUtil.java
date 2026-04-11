@@ -25,27 +25,26 @@ public class CSVReaderUtil {
 	}
 	
 
-	public static Iterator<UserBean> loadCSV(String pathOFCSVFile) {
+	public static <T> Iterator<T> loadCSV(String pathOFCSVFile,Class<T> bean) {
 		
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOFCSVFile);
 		
 		InputStreamReader isr=new InputStreamReader(inputStream);
 		
 		CSVReader csvReader=new CSVReader(isr); //CSV Reader constructor require Reader
-
 		
-		CsvToBean<UserBean> csvTobean=new CsvToBeanBuilder(csvReader)
-				.withType(UserBean.class)
+		CsvToBean<T> csvTobean=new CsvToBeanBuilder(csvReader)
+				.withType(bean)
 				.withIgnoreEmptyLine(true)
 				.build();
 		
-		List<UserBean> userList = csvTobean.parse();
+		List<T> list = csvTobean.parse();
 		
 		//System.out.print(userList);
 		
 		//Here the Data provider concept came in a picture
 		
-		return userList.iterator();
+		return list.iterator();
 		
 		
 		
