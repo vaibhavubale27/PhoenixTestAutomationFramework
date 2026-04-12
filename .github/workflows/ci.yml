@@ -56,7 +56,7 @@ jobs:
             echo "groups=${{ github.event.inputs.groups || 'faker'}}" >> $GITHUB_OUTPUT
         
     - name: Execute Test Automation Framework
-      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}" -Dgroups="${{ steps.default.outputs.faker }}"
+      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}" -Dgroups="${{ steps.default.outputs.groups }}"
 
     - name: Upload A Build Artifact
       if: always()
