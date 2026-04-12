@@ -69,7 +69,7 @@ public class FakerDemo2 {
 		
 		String fakeRemark=faker.lorem().sentence(20);
 		Random random=new Random();
-		int randomProblemId=random.nextInt(26)+1;
+		int randomProblemId=random.nextInt(27)+1;
 		
 		Problems problems=new Problems(randomProblemId, fakeRemark);
 		
