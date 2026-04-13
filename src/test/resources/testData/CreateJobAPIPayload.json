@@ -24,9 +24,87 @@
     },
     "customer_product": {
         "dop": "2025-12-17T18:30:00.000Z",
-        "serial_number": "15588573229933",
-        "imei1": "15588573229933",
-        "imei2": "15588573229933",
+        "serial_number": "85588573229931",
+        "imei1": "85588573229931",
+        "imei2": "85588573229931",
+        "popurl": "2025-12-17T18:30:00.000Z",
+        "product_id": 3,
+        "mst_model_id": 3
+    },
+    "problems": [
+        {
+            "id": 1,
+            "remark": "Phone not working"
+        }
+    ]
+},
+{
+    "mst_service_location_id": 0,
+    "mst_platform_id": 2,
+    "mst_warrenty_status_id": 1,
+    "mst_oem_id": 2,
+    "customer": {
+        "first_name":"Jatin",
+        "last_name": "Shharma",
+        "mobile_number": "9897969594",
+        "mobile_number_alt": "",
+        "email_id": "Jatin.Sharma@techwithjatin.com",
+        "email_id_alt": "Jatin.Sharma@techwithjatin.com"
+    },
+    "customer_address": {
+        "flat_number": "902",
+        "apartment_name": "Yashwin Urbo",
+        "street_name": "Pune-Banglore highway",
+        "landmark": "Wakad",
+        "area": "Pune",
+        "pincode": "411033",
+        "country": "India",
+        "state": "Maharashtra"
+    },
+    "customer_product": {
+        "dop": "2025-12-17T18:30:00.000Z",
+        "serial_number": "85588573229932",
+        "imei1": "85588573229932",
+        "imei2": "85588573229932",
+        "popurl": "2025-12-17T18:30:00.000Z",
+        "product_id": 3,
+        "mst_model_id": 3
+    },
+    "problems": [
+        {
+            "id": 1,
+            "remark": "Phone not working"
+        }
+    ]
+},
+{
+    "mst_service_location_id": 0,
+    "mst_platform_id": 2,
+    "mst_warrenty_status_id": 1,
+    "mst_oem_id": 2,
+    "customer": {
+        "first_name":"Jatin",
+        "last_name": "Shharma",
+        "mobile_number": "9897969594",
+        "mobile_number_alt": "",
+        "email_id": "Jatin.Sharma@techwithjatin.com",
+        "email_id_alt": "Jatin.Sharma@techwithjatin.com"
+    },
+    "customer_address": {
+        "flat_number": "902",
+        "apartment_name": "Yashwin Urbo",
+        "street_name": "Pune-Banglore highway",
+        "landmark": "Wakad",
+        "area": "Pune",
+        "pincode": "411033",
+        "country": "India",
+        "state": "Maharashtra"
+    },
+    "customer_product": {
+        "dop": "2025-12-17T18:30:00.000Z",
+        "serial_number": "85588573229933",
+        "imei1": "85588573229933",
+        "imei2": "85588573229933",
         "popurl": "2025-12-17T18:30:00.000Z",
         "product_id": 3,
         "mst_model_id": 3
@@ -38,4 +116,5 @@
         }
     ]
 }
+
 ]
