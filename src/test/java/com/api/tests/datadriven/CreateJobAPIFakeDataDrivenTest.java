@@ -29,14 +29,14 @@ import static com.api.utils.SpecUtil.*;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
-public class CreateJobAPIDatadrivenTest {
+public class CreateJobAPIFakeDataDrivenTest {
 	
 	private CreateJobPayload createJobPayload;
 
 
-	@Test(description = "Vrifying the Create Job API Test is able to create inwarrenty job",groups = {"smoke","regression","api"},
+	@Test(description = "Verifying the Create Job API Test is able to create inwarrenty job",groups = {"smoke","regression","api","faker"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
-			dataProvider = "CreateJobAPIDataProvider"
+			dataProvider = "CreateJobAPIFakeDataProvider"
 			)
 	public void createJobAPITest(CreateJobPayload createJobPayload) throws IOException {
 			

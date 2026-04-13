@@ -2,9 +2,9 @@ name: Phoenix Test Automation Workflow
 
 on:
   push:
-    branches: [ "feature/r7-create-job-api" ]
+    branches: [ "feature/r9-data-driven-faker" ]
   pull_request:
-    branches: [ "feature/r7-create-job-api" ]
+    branches: [ "feature/r9-data-driven-faker" ]
   schedule: #set the cron for midnight IST
     - cron: "30 18 * * *"
     - cron: "30 17 * * *"
@@ -21,8 +21,15 @@ on:
       suiteXmlFile:
         description: "TestNg XML File"
         type: choice
-        options: [testng.xml,smoke.xml,regression.xml]
+        options: [testng.xml,smoke.xml,regression.xml,testng-datadriven.xml]
         default: qa
+        required: true
+
+      groups:
+        description: "Groups"
+        type: choice
+        options: [csv,faker,smoke,regression,sanity]
+        default: faker
         required: true
         
 
@@ -46,9 +53,10 @@ jobs:
       run: |
             echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || 'testng.xml'}}" >> $GITHUB_OUTPUT
             echo "env=${{ github.event.inputs.env || 'qa'}}" >> $GITHUB_OUTPUT
+            echo "groups=${{ github.event.inputs.groups || 'faker'}}" >> $GITHUB_OUTPUT
         
     - name: Execute Test Automation Framework
-      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}" 
+      run: mvn clean test -DsuiteXmlFile="${{ steps.default.outputs.suiteXmlFile }}" -Denv="${{ steps.default.outputs.env }}" -Dgroups="${{ steps.default.outputs.groups }}"
 
     - name: Upload A Build Artifact
       if: always()
