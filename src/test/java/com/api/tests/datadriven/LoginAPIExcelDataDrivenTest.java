@@ -4,10 +4,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import java.io.IOException;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredentials;
 import com.dataproviders.api.bean.UserBean;
 
 import static com.api.utils.SpecUtil.*;
@@ -22,12 +20,12 @@ public class LoginAPIExcelDataDrivenTest {
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "LoginAPIExcelDataProvider"
 			)
-	public void loginAPITest(UserCredentials userCredentials) throws IOException {
+	public void loginAPITest(UserBean userBean) throws IOException {
 		
 		//Rest Assured code
 			
 		given()
-	        .spec(requestSpec(userCredentials))
+	        .spec(requestSpec(userBean))
 		.when()
 			.post("login")
 		.then()
