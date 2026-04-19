@@ -13,8 +13,10 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.api.request.model.UserCredentials;
+import com.dataproviders.api.bean.CreateJobBean;
 import com.dataproviders.api.bean.UserBean;
 import com.poiji.bind.Poiji;
+import com.poiji.option.PoijiOptions;
 
 public class ExcelReaderUtil3 {
 	
@@ -22,7 +24,7 @@ public class ExcelReaderUtil3 {
 		
 	}
 	
-	public static  <T> Iterator<UserBean> loadExcelData(String filepath, String sheetName,Class<T> clazz) throws IOException {
+	public static  <T> Iterator<T> loadExcelData(String filepath, String sheetName,Class<T> clazz) throws IOException {
 		//Apache POI library
 		
 		InputStream inputStream=Thread.currentThread().getContextClassLoader().getResourceAsStream(filepath);
@@ -30,16 +32,14 @@ public class ExcelReaderUtil3 {
 		XSSFWorkbook myWorkBook=new XSSFWorkbook(inputStream);
 		XSSFSheet mySheet=myWorkBook.getSheet(sheetName);
 		
-		List<UserBean> datalist=Poiji.fromExcel(mySheet, UserBean.class);
+		List<T> datalist=Poiji.fromExcel(mySheet, clazz);
 		
 		return datalist.iterator();
-		
-		
-		
-		
-		
-		
-		
-	}
+   }
+
+
+
+
+
 
 }
