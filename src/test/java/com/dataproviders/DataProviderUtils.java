@@ -1,5 +1,6 @@
 package com.dataproviders;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,8 @@ import com.api.request.model.CreateJobPayload;
 import com.api.request.model.UserCredentials;
 import com.api.utils.CSVReaderUtil;
 import com.api.utils.CreateJobBeanMapper;
+import com.api.utils.ExcelReaderUtil2;
+import com.api.utils.ExcelReaderUtil3;
 import com.api.utils.FakerDataGenerator;
 import com.api.utils.JsonReaderUtil;
 import com.dataproviders.api.bean.CreateJobBean;
@@ -57,6 +60,31 @@ public class DataProviderUtils {
 	@DataProvider(name = "CreateJobAPIJsonDataProvider",parallel = true)
 	public static Iterator<CreateJobPayload> CreateJobAPIJsonrDataProvider() {
 		return JsonReaderUtil.loadJson("testData\\CreateJobAPIPayload.json", CreateJobPayload[].class);
+	}
+	
+	@DataProvider(name = "LoginAPIExcelDataProvider",parallel = true)
+	public static Iterator<UserBean> LoginAPIExcelDataProvider() throws IOException {
+		return ExcelReaderUtil3.loadExcelData("testData\\PhoenixTestData.xlsx","LoginTestData", UserBean.class);
+		
+	}
+	
+	@DataProvider(name = "CreateJobAPIExcelDataProvider",parallel = true)
+	public static Iterator<CreateJobPayload> CreateJobAPIExcelDataProvider() throws IOException {
+		Iterator<CreateJobBean> createJobBeanIterator= ExcelReaderUtil3.loadExcelData("testData\\PhoenixTestData.xlsx", "CreateJobTestData", CreateJobBean.class);
+		
+		List<CreateJobPayload> payLoadList = new ArrayList<CreateJobPayload>();
+		CreateJobBean tempBean;
+		CreateJobPayload tempPayload;
+		
+		while(createJobBeanIterator.hasNext()) {
+			tempBean = createJobBeanIterator.next();
+			tempPayload = CreateJobBeanMapper.mapper(tempBean);
+			payLoadList.add(tempPayload);
+			
+		}
+		
+		return payLoadList.iterator();
+		
 	}
 
 }
