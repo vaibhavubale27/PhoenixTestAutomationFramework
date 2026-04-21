@@ -45,11 +45,9 @@ public class ConfigManager {
 		
 	}
 	
-	public static String getProperty(String key) throws IOException {
+	public static String getProperty(String key){
 		//Special class in java to read the properties file 
-		
-	
-		
+
 		return prop.getProperty(key);
 		
 		
